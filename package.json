@@ -4,9 +4,8 @@
   "main": "dist/index.js",
   "scripts": {
     "lint": "standardx -v \"./**/*.ts\"",
-    "build-tests": "esbuild test/index.ts --bundle --format=cjs --keep-names > test/test-bundle.js",
-    "test": "npm run lint && npm run build && esbuild test/index.ts --bundle --platform=node | node | tap-arc",
-    "test-tape-run": "cat test/index.html | tape-run --input=html --static=test | tap-arc",
+    "build-tests": "esbuild test/index.ts --platform=node --bundle --format=esm --keep-names > test/index.js",
+    "test": "npm run lint && npm run build && esbuild test/index.ts --bundle --platform=node --format=esm | node --input-type=module",
     "build": "rm -rf ./dist/* && npm run build-node && npm run build-browser",
     "build-browser": "esbuild src/browser.ts --format=esm --keep-names --outdir=./dist",
     "build-node": "esbuild src/node.ts --platform=node --keep-names --outdir=./dist",
@@ -27,7 +26,6 @@
     "postcss-nesting": "^12.0.1",
     "preact": "^10.17.1",
     "standardx": "^7.0.0",
-    "tap-arc": "^0.3.5",
     "tape-run": "^10.0.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.9"

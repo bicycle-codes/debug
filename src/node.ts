@@ -2,6 +2,7 @@ import supportsColor from 'supports-color'
 import ms from 'ms'
 import tty from 'tty'
 import util from 'util'
+import { coerce } from './common.js'
 
 const colors:number[] = (supportsColor &&
     // @ts-ignore
@@ -133,7 +134,8 @@ function createFormatters (useColors:boolean, inspectOpts = {}) {
  * @return {Function}
  */
 export function createDebug (namespace:string) {
-    let prevTime
+    // eslint-disable-next-line
+    let prevTime = Number(new Date())
     const color = selectColor(namespace, colors)
 
     function debug (...args:string[]) {
@@ -146,10 +148,10 @@ export function createDebug (namespace:string) {
 }
 
 function logger (namespace:string, args:string[], { prevTime, color }) {
+    console.log('prevvvvv', prevTime)
     // Set `diff` timestamp
     const curr = Number(new Date())
-    const ms = curr - (prevTime || curr)
-    const diff = ms
+    const diff = curr - (prevTime || curr)
     prevTime = curr
 
     args[0] = coerce(args[0])
@@ -221,19 +223,6 @@ function createRegexFromEnvVar () {
 }
 
 export default createDebug
-
-/**
-* Coerce `val`.
-*
-* @param {unknown} val
-* @return {unknown}
-*/
-function coerce (val) {
-    if (val instanceof Error) {
-        return val.stack || val.message
-    }
-    return val
-}
 
 /**
  * Adds ANSI color escape codes if enabled.
