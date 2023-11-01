@@ -1,7 +1,8 @@
 {
+  "name": "@nichoth/debug",
+  "description": "Debug utility",
   "type": "module",
   "version": "0.0.0",
-  "main": "dist/index.js",
   "scripts": {
     "lint": "standardx -v \"./**/*.ts\"",
     "build-tests": "esbuild test/index.ts --platform=node --bundle --format=esm --keep-names > test/index.js",
@@ -33,5 +34,22 @@
     "default": "./dist/browser.js"
   },
   "author": "nichoth <nichoth@gmail.com> (https://nichoth.com)",
-  "license": "AGPL-3.0-or-later"
+  "license": "MIT",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nichoth/debug.git"
+  },
+  "keywords": [
+    "debug",
+    "conosle",
+    "log"
+  ],
+  "bugs": {
+    "url": "https://github.com/nichoth/debug/issues"
+  },
+  "homepage": "https://github.com/nichoth/debug#readme"
 }
