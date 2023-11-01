@@ -1,4 +1,4 @@
-# debug
+# debug ![tests](https://github.com/nichoth/debug/actions/workflows/nodejs.yml/badge.svg)
 A tiny JavaScript debugging utility that works in Node.js and browsers. Use environment variables to control logging, so there are no ridiculous console log statements in production.
 
 This is based on [debug](https://github.com/debug-js/debug). It's been rewritten to use contemporary JS.
