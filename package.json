@@ -45,11 +45,11 @@
   },
   "keywords": [
     "debug",
-    "conosle",
+    "console",
     "log"
   ],
   "bugs": {
     "url": "https://github.com/nichoth/debug/issues"
   },
-  "homepage": "https://github.com/nichoth/debug#readme"
+  "homepage": "https://github.com/nichoth/debug"
 }
