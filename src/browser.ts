@@ -80,7 +80,8 @@ const colors = [
     '#FFCC33'
 ]
 
-const log = console.debug || console.log || (() => {})
+// const log = console.debug || console.log || (() => {})
+const log = console.log || (() => {})
 
 /**
  * Create a debugger with the given `namespace`.
@@ -88,18 +89,23 @@ const log = console.debug || console.log || (() => {})
  * @param {string} namespace
  * @return {Function}
  */
-export function createDebug (namespace:string) {
+export function createDebug (namespace?:string) {
     // eslint-disable-next-line
     let prevTime = Number(new Date())
-    const color = selectColor(namespace, colors)
+    const _namespace = namespace || generateRandomString(10)
+    const color = selectColor(_namespace, colors)
 
     function debug (...args:string[]) {
         if (isEnabled(namespace)) {
-            return logger(namespace, args, { prevTime, color })
+            return logger(_namespace, args, { prevTime, color })
         }
     }
 
     return debug
+}
+
+function generateRandomString (length = 6) {
+    return Math.random().toString(20).substring(2, length)
 }
 
 export default createDebug
@@ -107,7 +113,7 @@ export default createDebug
 /**
  * Check if the given namespace is enabled.
  */
-function isEnabled (namespace:string):boolean {
+function isEnabled (namespace?:string):boolean {
     // if no namespace,
     // and we are in vite DEV mode
     if (namespace === undefined) {
@@ -116,10 +122,8 @@ function isEnabled (namespace:string):boolean {
         }
     }
 
-    console.log(import.meta.env.VITE_DEBUG)
-
     const envVar = createRegexFromEnvVar()
-    return !!(envVar?.test(namespace))
+    return !!(envVar?.test(namespace!))
 }
 
 function createRegexFromEnvVar () {
@@ -173,7 +177,7 @@ function logger (namespace:string, args:string[], { prevTime, color }) {
     // Apply any `formatters` transformations
     let index = 0
     args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
-        // If we encounter an escaped % then don't increase the
+        // If we encounter an escaped %, then don't increase the
         // array index
         if (match === '%%') return '%'
 

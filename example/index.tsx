@@ -1,7 +1,9 @@
-import { render } from 'preact'
+import { createDebug } from '../src/browser.js'
 
-function Example () {
-    return (<div>hello</div>)
-}
+const debug = createDebug('fooo')
 
-render((<Example />), document.getElementById('root')!)
+debug('debug works')
+
+const debug2 = createDebug()
+
+debug2('testing debug 2')
