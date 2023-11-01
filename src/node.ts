@@ -148,7 +148,6 @@ export function createDebug (namespace:string) {
 }
 
 function logger (namespace:string, args:string[], { prevTime, color }) {
-    console.log('prevvvvv', prevTime)
     // Set `diff` timestamp
     const curr = Number(new Date())
     const diff = curr - (prevTime || curr)
