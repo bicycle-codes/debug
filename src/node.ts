@@ -134,65 +134,63 @@ function createFormatters (useColors:boolean, inspectOpts = {}) {
  */
 export function createDebug (namespace:string) {
     let prevTime
-
     const color = selectColor(namespace, colors)
 
     function debug (...args:string[]) {
-        const formatters = createFormatters(shouldUseColors())
-
         if (isEnabled(namespace)) {
-            return logger()
-        }
-
-        function logger () {
-            // Set `diff` timestamp
-            const curr = Number(new Date())
-            const ms = curr - (prevTime || curr)
-            const diff = ms
-            prevTime = curr
-
-            args[0] = coerce(args[0])
-
-            if (typeof args[0] !== 'string') {
-                // Anything else let's inspect with %O
-                args.unshift('%O')
-            }
-
-            // Apply any `formatters` transformations
-            let index = 0
-            args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
-                // If we encounter an escaped % then don't increase the
-                // array index
-                if (match === '%%') return '%'
-
-                index++
-
-                const formatter = formatters[format]
-                if (typeof formatter === 'function') {
-                    const val = args[index]
-                    match = formatter.call(self, val)
-
-                    // Now we need to remove `args[index]` since it's inlined
-                    //   in the `format`
-                    args.splice(index, 1)
-                    index--
-                }
-                return match
-            })
-
-            // Apply env-specific formatting (colors, etc.)
-            const _args = formatArgs({
-                diff,
-                color,
-                useColors: shouldUseColors(),
-                namespace
-            }, args)
-
-            log(..._args)
+            return logger(namespace, args, { prevTime, color })
         }
     }
 
     return debug
+}
+
+function logger (namespace:string, args:string[], { prevTime, color }) {
+    // Set `diff` timestamp
+    const curr = Number(new Date())
+    const ms = curr - (prevTime || curr)
+    const diff = ms
+    prevTime = curr
+
+    args[0] = coerce(args[0])
+    const formatters = createFormatters(shouldUseColors())
+
+    if (typeof args[0] !== 'string') {
+        // Anything else let's inspect with %O
+        args.unshift('%O')
+    }
+
+    // Apply any `formatters` transformations
+    let index = 0
+    args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
+        // If we encounter an escaped % then don't increase the
+        // array index
+        if (match === '%%') return '%'
+
+        index++
+
+        const formatter = formatters[format]
+        if (typeof formatter === 'function') {
+            const val = args[index]
+            match = formatter.call(self, val)
+
+            // Now we need to remove `args[index]` since it's inlined
+            //   in the `format`
+            args.splice(index, 1)
+            index--
+        }
+        return match
+    })
+
+    // Apply env-specific formatting (colors, etc.)
+    const _args = formatArgs({
+        diff,
+        color,
+        useColors: shouldUseColors(),
+        namespace
+    }, args)
+
+    log(..._args)
 }
 
 /**
@@ -221,37 +219,6 @@ function createRegexFromEnvVar () {
         return new RegExp('^' + names + '$')
     }
 }
-
-// /**
-//  * Enables a debug mode by namespaces. This can include modes
-//  * separated by a colon and wildcards.
-//  *
-//  * @param {string} namespaces
-//  */
-// function enable (namespaces:string) {
-//     createDebug.names = []
-//     createDebug.skips = []
-
-//     let i
-//     const split = (typeof namespaces === 'string' ? namespaces : '')
-//         .split(/[\s,]+/)
-//     const len = split.length
-
-//     for (i = 0; i < len; i++) {
-//         if (!split[i]) {
-//             // ignore empty strings
-//             continue
-//         }
-
-//         namespaces = split[i].replace(/\*/g, '.*?')
-
-//         if (namespaces[0] === '-') {
-//             createDebug.skips.push(new RegExp('^' + namespaces.slice(1) + '$'))
-//         } else {
-//             createDebug.names.push(new RegExp('^' + namespaces + '$'))
-//         }
-//     }
-// }
 
 export default createDebug
 

@@ -2,6 +2,7 @@
   "compilerOptions": {
     "listFiles": true,
     "module": "NodeNext",
+    "types": ["vite/client", "node"],
     "target": "ES2022",
     "moduleResolution": "nodenext",
     "esModuleInterop": false,
