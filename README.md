@@ -61,6 +61,8 @@ npm start
 ```
 
 ### node
+Run tests:
+
 ```sh
 npm run build-tests
 ```
