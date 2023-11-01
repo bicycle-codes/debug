@@ -97,7 +97,7 @@ export function createDebug (namespace?:string) {
 
     function debug (...args:string[]) {
         if (isEnabled(namespace)) {
-            return logger(_namespace, args, { prevTime, color })
+            return logger(namespace || 'DEV', args, { prevTime, color })
         }
     }
 

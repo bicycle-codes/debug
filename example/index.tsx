@@ -7,3 +7,10 @@ debug('debug works')
 const debug2 = createDebug()
 
 debug2('testing debug 2')
+
+setTimeout(() => {
+    debug2('log again')
+}, 1000)
+
+const debug3 = createDebug('barrr')
+debug3('barrrrr')  // should not log
