@@ -1,7 +1,8 @@
 import { test } from '@nichoth/tapzero'
-import { example } from '../src/index.js'
+import createDebug from '../src/node.js'
 
-test('example', async t => {
-    t.ok('ok', 'should be an example')
-    example()
+test('createDebug', async t => {
+    const debug = createDebug('test')
+    debug('trying things')
+    t.ok(true, "logged something and didn't throw")
 })
