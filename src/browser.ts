@@ -84,7 +84,7 @@ const log = console.log || (() => {})
 
 let createDebug = (namespace?:string) => (args:any) => {}
 
-if (import.meta.env.DEV) {
+if (import.meta.env.DEV || import.meta.env.VITE_DEBUG) {
     /**
      * Create a debugger with the given `namespace`, only
      * if we are in DEV mode.
