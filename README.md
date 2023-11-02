@@ -36,6 +36,8 @@ This is ergonomic with the [vite](https://vitejs.dev/) bundler. This module will
 VITE_DEBUG=fooo
 ```
 
+**If you are in production** (`import.meta.env.PROD`), then this exports a noop, so debug will do nothing, and your bundle will be smaller.
+
 In your JS code:
 ```js
 import { createDebug } from '@nichoth/debug'

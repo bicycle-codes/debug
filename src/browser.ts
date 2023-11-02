@@ -80,35 +80,46 @@ const colors = [
     '#FFCC33'
 ]
 
-// const log = console.debug || console.log || (() => {})
 const log = console.log || (() => {})
 
-/**
- * Create a debugger with the given `namespace`.
- *
- * @param {string} namespace
- * @return {Function}
- */
-export function createDebug (namespace?:string) {
-    // eslint-disable-next-line
-    let prevTime = Number(new Date())
-    const _namespace = namespace || generateRandomString(10)
-    const color = selectColor(_namespace, colors)
+let createDebug = (namespace?:string) => (args:any) => {}
 
-    function debug (...args:string[]) {
-        if (isEnabled(namespace)) {
-            return logger(namespace || 'DEV', args, { prevTime, color })
+if (import.meta.env.DEV) {
+    /**
+     * Create a debugger with the given `namespace`, only
+     * if we are in DEV mode.
+     *
+     * @param {string?} namespace
+     * @return {Function}
+     */
+    createDebug = function createDebug (namespace?:string) {
+        // eslint-disable-next-line
+        let prevTime = Number(new Date())
+        const _namespace = namespace || generateRandomString(10)
+        const color = selectColor(_namespace, colors)
+
+        function debug (...args:string[]) {
+            if (isEnabled(namespace)) {
+                return logger(namespace || 'DEV', args, { prevTime, color })
+            }
         }
-    }
 
-    return debug
+        return debug
+    }
 }
 
-function generateRandomString (length = 6) {
+export { createDebug }
+export default createDebug
+
+/**
+ * Use this to create a random namespace in the case that `debug`
+ * is called without any arguments.
+ * @param {number} length Lenght of the random string
+ * @returns {string}
+ */
+function generateRandomString (length = 6):string {
     return Math.random().toString(20).substring(2, length)
 }
-
-export default createDebug
 
 /**
  * Check if the given namespace is enabled.
