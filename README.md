@@ -38,6 +38,7 @@ VITE_DEBUG=fooo
 
 **If you are in production** (`import.meta.env.PROD`), then this exports a noop, so debug will do nothing, and your bundle will be smaller.
 
+#### Call with a namespace
 In your JS code:
 ```js
 import { createDebug } from '@nichoth/debug'
@@ -45,7 +46,8 @@ const debug = createDebug('fooo')
 debug('debug works')
 ```
 
-Or, if you call this without any `namespace` argument, it will look at the value of `import.meta.env.DEV`. If you are in DEV mode, it will log things in a random color:
+#### No namespace
+Or, if you call this without a `namespace` argument, it will look at the value of `import.meta.env.DEV`. If you are in DEV mode, then it will log things in a random color:
 
 ```js
 const debugTwo = createDebug()
