@@ -4,7 +4,7 @@ A tiny JavaScript debugging utility that works in Node.js and browsers. Use envi
 This is based on [debug](https://github.com/debug-js/debug). It's been rewritten to use contemporary JS.
 
 **Featuring:**
-* Use `exports` field in `package.json` to choose node JS or browser version
+* Use [exports](https://github.com/nichoth/debug/blob/main/package.json#L31) field in `package.json` to choose node JS or browser version
 * ESM only
 
 ## Installation
