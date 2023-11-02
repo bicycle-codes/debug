@@ -1,4 +1,4 @@
-import { coerce, selectColor } from './common.js'
+import { coerce, selectColor, createRegexFromEnvVar } from './common.js'
 import humanize from 'ms'
 
 const colors = [
@@ -122,27 +122,9 @@ function isEnabled (namespace?:string):boolean {
         }
     }
 
-    const envVar = createRegexFromEnvVar()
-    return !!(envVar?.test(namespace!))
-}
-
-function createRegexFromEnvVar () {
-    let names = import.meta.env.VITE_DEBUG
-    if (!names) return
-
-    const split = names.split(/[\s,]+/)
-    const len = split.length
-
-    for (let i = 0; i < len; i++) {
-        if (!split[i]) {
-            // ignore empty strings
-            continue
-        }
-
-        names = split[i].replace(/\*/g, '.*?')
-
-        return new RegExp('^' + names + '$')
-    }
+    if (!import.meta.env.VITE_DEBUG) throw new Error('Missing env var DEBUG')
+    const envVar = createRegexFromEnvVar(import.meta.env.VITE_DEBUG)
+    return envVar.test(namespace!)
 }
 
 /**

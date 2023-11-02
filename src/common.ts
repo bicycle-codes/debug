@@ -29,3 +29,19 @@ export function selectColor (
 
     return colors[Math.abs(hash) % colors.length]
 }
+
+export function createRegexFromEnvVar (names:string):RegExp {
+    const split = names.split(/[\s,]+/)
+    const len = split.length
+
+    for (let i = 0; i < len; i++) {
+        if (!split[i]) {
+            // ignore empty strings
+            continue
+        }
+
+        names = split[i].replace(/\*/g, '.*?')
+    }
+
+    return new RegExp('^' + names + '$')
+}

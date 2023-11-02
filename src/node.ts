@@ -2,7 +2,7 @@ import supportsColor from 'supports-color'
 import ms from 'ms'
 import tty from 'tty'
 import util from 'util'
-import { coerce } from './common.js'
+import { coerce, createRegexFromEnvVar } from './common.js'
 
 const colors:number[] = (supportsColor &&
     // @ts-ignore
@@ -198,27 +198,9 @@ function logger (namespace:string, args:string[], { prevTime, color }) {
  * Check if the given namespace is enabled.
  */
 function isEnabled (namespace:string):boolean {
-    const envVar = createRegexFromEnvVar()
-    return !!(envVar?.test(namespace))
-}
-
-function createRegexFromEnvVar () {
-    let names = process.env.DEBUG
-    if (!names) return
-
-    const split = names.split(/[\s,]+/)
-    const len = split.length
-
-    for (let i = 0; i < len; i++) {
-        if (!split[i]) {
-            // ignore empty strings
-            continue
-        }
-
-        names = split[i].replace(/\*/g, '.*?')
-
-        return new RegExp('^' + names + '$')
-    }
+    if (!process.env.DEBUG) throw new Error('Missing DEBUG env var')
+    const envVar = createRegexFromEnvVar(process.env.DEBUG)
+    return envVar.test(namespace)
 }
 
 export default createDebug
