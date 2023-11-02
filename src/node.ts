@@ -198,7 +198,7 @@ function logger (namespace:string, args:string[], { prevTime, color }) {
  * Check if the given namespace is enabled.
  */
 function isEnabled (namespace:string):boolean {
-    if (!process.env.DEBUG) throw new Error('Missing DEBUG env var')
+    if (!process.env.DEBUG) return false
     const envVar = createRegexFromEnvVar(process.env.DEBUG)
     return envVar.test(namespace)
 }

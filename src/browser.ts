@@ -122,7 +122,7 @@ function isEnabled (namespace?:string):boolean {
         }
     }
 
-    if (!import.meta.env.VITE_DEBUG) throw new Error('Missing env var DEBUG')
+    if (!import.meta.env.VITE_DEBUG) return false
     const envVar = createRegexFromEnvVar(import.meta.env.VITE_DEBUG)
     return envVar.test(namespace!)
 }
