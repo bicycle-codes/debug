@@ -49,6 +49,10 @@ Or, if you call this without any `namespace` argument, it will look at the value
 const debugTwo = createDebug()
 // this is only logged if `import.meta.env.DEV` is true
 debugTwo('testing debug 2')
+
+setTimeout(() => {
+    debug2('log again')
+}, 1000)
 ```
 
 ![Screenshot of `debug` in a browser](screenshot2.png)
