@@ -51,7 +51,7 @@ const debugTwo = createDebug()
 debugTwo('testing debug 2')
 ```
 
-![Screenshot of `debug` in a browser](screenshot.png)
+![Screenshot of `debug` in a browser](screenshot2.png)
 
 ## develop
 
