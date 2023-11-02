@@ -31,7 +31,7 @@ DEBUG=fooo node ./test/fixture/node.js
 ```
 
 ### browser
-This is ergonomic with the [vite](https://vitejs.dev/) bundler. The debug tool will look for an env variable prefixed with `VITE_`:
+This is ergonomic with the [vite](https://vitejs.dev/) bundler. This module will look for an env variable prefixed with `VITE_`:
 ```sh
 VITE_DEBUG=fooo
 ```
