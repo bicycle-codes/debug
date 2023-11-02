@@ -10,7 +10,7 @@ This is based on [debug](https://github.com/debug-js/debug). It's been rewritten
 ## Installation
 
 ```sh
-$ npm i -S @nichoth/debug
+npm i -S @nichoth/debug
 ```
 
 ## example
