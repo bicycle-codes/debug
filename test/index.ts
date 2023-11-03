@@ -2,7 +2,7 @@ import { test } from '@nichoth/tapzero'
 import createDebug from '../src/node.js'
 
 let debug
-test('createDebug', async t => {
+test('createDebug', t => {
     debug = createDebug('test')
     debug('trying things')
     t.ok(true, "logged something and didn't throw")
@@ -16,4 +16,9 @@ test('log some more', async t => {
             resolve()
         }, 1000)
     })
+})
+
+test('log another namespace', t => {
+    const debug = createDebug('fooo')
+    debug('hello')
 })

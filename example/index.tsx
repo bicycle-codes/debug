@@ -13,4 +13,7 @@ setTimeout(() => {
 }, 1000)
 
 const debug3 = createDebug('barrr')
-debug3('barrrrr')  // should not log
+debug3('barrrrr')
+
+const debug4 = createDebug('bazzz')
+debug4('bazzzzzzz')  // should not log

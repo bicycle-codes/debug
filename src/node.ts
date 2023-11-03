@@ -199,8 +199,8 @@ function logger (namespace:string, args:string[], { prevTime, color }) {
  */
 function isEnabled (namespace:string):boolean {
     if (!process.env.DEBUG) return false
-    const envVar = createRegexFromEnvVar(process.env.DEBUG)
-    return envVar.test(namespace)
+    const envVars = createRegexFromEnvVar(process.env.DEBUG)
+    return envVars.some(regex => regex.test(namespace))
 }
 
 export default createDebug

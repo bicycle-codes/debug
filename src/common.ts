@@ -30,18 +30,11 @@ export function selectColor (
     return colors[Math.abs(hash) % colors.length]
 }
 
-export function createRegexFromEnvVar (names:string):RegExp {
-    const split = names.split(/[\s,]+/)
-    const len = split.length
+export function createRegexFromEnvVar (names:string):RegExp[] {
+    const split = names.split(/[\s,]+/).filter(Boolean)
+    const regexs = split
+        .map(word => word.replace(/\*/g, '.*?'))
+        .map(r => new RegExp('^' + r + '$'))
 
-    for (let i = 0; i < len; i++) {
-        if (!split[i]) {
-            // ignore empty strings
-            continue
-        }
-
-        names = split[i].replace(/\*/g, '.*?')
-    }
-
-    return new RegExp('^' + names + '$')
+    return regexs
 }

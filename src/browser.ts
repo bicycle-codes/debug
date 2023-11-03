@@ -133,9 +133,12 @@ function isEnabled (namespace?:string):boolean {
         }
     }
 
+    if (!namespace) return false
+
     if (!import.meta.env.VITE_DEBUG) return false
-    const envVar = createRegexFromEnvVar(import.meta.env.VITE_DEBUG)
-    return envVar.test(namespace!)
+    const envVars = createRegexFromEnvVar(import.meta.env.VITE_DEBUG)
+    console.log('env vars', envVars)
+    return envVars.some(regex => regex.test(namespace))
 }
 
 /**
