@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@nichoth/tapzero": "^0.8.0",
+    "@types/node": "^20.8.10",
     "@typescript-eslint/parser": "^5.55.0",
     "esbuild": "^0.15.18",
     "postcss-nesting": "^12.0.1",
