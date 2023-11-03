@@ -145,12 +145,6 @@ export function createDebug (namespace?:string) {
         }
     }
 
-    // function debug (...args:any[]) {
-    //     if (isEnabled(namespace)) {
-    //         return logger(namespace || 'DEV', args, { prevTime, color })
-    //     }
-    // }
-
     return debug
 }
 
