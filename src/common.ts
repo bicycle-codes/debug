@@ -38,3 +38,13 @@ export function createRegexFromEnvVar (names:string):RegExp[] {
 
     return regexs
 }
+
+/**
+ * Use this to create a random namespace in the case that `debug`
+ * is called without any arguments.
+ * @param {number} length Lenght of the random string
+ * @returns {string}
+ */
+export function generateRandomString (length = 6):string {
+    return Math.random().toString(20).substring(2, length)
+}

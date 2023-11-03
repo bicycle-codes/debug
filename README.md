@@ -18,6 +18,8 @@ This is based on [debug](https://github.com/debug-js/debug). It's been rewritten
 npm i -D @nichoth/debug
 ```
 
+------------------------------------------------------------------
+
 ## example
 
 ### node JS
@@ -34,6 +36,22 @@ Call this with an env var of `DEBUG=fooo`
 ```bash
 DEBUG=fooo node ./test/fixture/node.js
 ```
+
+#### NODE_ENV
+If you are in dev mode (`process.env.NODE_ENV === 'DEV`), then this will log things in a random color if you don't call it with a namespace or pass in a `DEBUG` env var.
+
+```js
+import createDebug from '@nichoth/debug'
+const debug = createDebug()
+debug('hello')
+```
+
+Run the script like this:
+```sh
+NODE_ENV=DEV node ./my-script.js
+```
+
+------------------------------------------------------
 
 ### browser
 This is ergonomic with the [vite](https://vitejs.dev/) bundler. This module will look for an env variable prefixed with `VITE_`:
@@ -65,6 +83,8 @@ setTimeout(() => {
 ```
 
 ![Screenshot of `debug` in a browser](screenshot2.png)
+
+-------------------------------------------------------------------
 
 ## develop
 

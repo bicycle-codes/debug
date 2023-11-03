@@ -1,4 +1,9 @@
-import { coerce, selectColor, createRegexFromEnvVar } from './common.js'
+import {
+    generateRandomString,
+    coerce,
+    selectColor,
+    createRegexFromEnvVar
+} from './common.js'
 import humanize from 'ms'
 
 const colors = [
@@ -110,16 +115,6 @@ if (import.meta.env.DEV || import.meta.env.VITE_DEBUG) {
 
 export { createDebug }
 export default createDebug
-
-/**
- * Use this to create a random namespace in the case that `debug`
- * is called without any arguments.
- * @param {number} length Lenght of the random string
- * @returns {string}
- */
-function generateRandomString (length = 6):string {
-    return Math.random().toString(20).substring(2, length)
-}
 
 /**
  * Check if the given namespace is enabled.

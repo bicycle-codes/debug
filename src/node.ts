@@ -2,7 +2,7 @@ import supportsColor from 'supports-color'
 import ms from 'ms'
 import tty from 'tty'
 import util from 'util'
-import { coerce, createRegexFromEnvVar } from './common.js'
+import { generateRandomString, coerce, createRegexFromEnvVar } from './common.js'
 
 const colors:number[] = (supportsColor &&
     // @ts-ignore
@@ -133,16 +133,23 @@ function createFormatters (useColors:boolean, inspectOpts = {}) {
  * @param {string} namespace
  * @return {Function}
  */
-export function createDebug (namespace:string) {
+export function createDebug (namespace?:string) {
     // eslint-disable-next-line
     let prevTime = Number(new Date())
-    const color = selectColor(namespace, colors)
+    const _namespace = namespace || generateRandomString(10)
+    const color = selectColor(_namespace, colors)
 
     function debug (...args:any[]) {
         if (isEnabled(namespace)) {
-            return logger(namespace, args, { prevTime, color })
+            return logger(namespace || 'DEV', args, { prevTime, color })
         }
     }
+
+    // function debug (...args:any[]) {
+    //     if (isEnabled(namespace)) {
+    //         return logger(namespace || 'DEV', args, { prevTime, color })
+    //     }
+    // }
 
     return debug
 }
@@ -197,8 +204,18 @@ function logger (namespace:string, args:any[], { prevTime, color }) {
 /**
  * Check if the given namespace is enabled.
  */
-function isEnabled (namespace:string):boolean {
+function isEnabled (namespace?:string):boolean {
+    // if no namespace,
+    // and we are in DEV mode
+    if (namespace === undefined) {
+        if (process.env.NODE_ENV === 'DEV') {
+            return true
+        }
+    }
+
+    if (!namespace) return false
     if (!process.env.DEBUG) return false
+
     const envVars = createRegexFromEnvVar(process.env.DEBUG)
     return envVars.some(regex => regex.test(namespace))
 }
