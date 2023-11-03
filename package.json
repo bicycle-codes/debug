@@ -27,6 +27,7 @@
     "vite": "^4.4.9"
   },
   "exports": {
+    "browser": "./dist/browser.js",
     "node": "./dist/node.js",
     "default": "./dist/browser.js"
   },
