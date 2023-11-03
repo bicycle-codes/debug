@@ -98,7 +98,7 @@ if (import.meta.env.DEV || import.meta.env.VITE_DEBUG) {
         const _namespace = namespace || generateRandomString(10)
         const color = selectColor(_namespace, colors)
 
-        function debug (...args:string[]) {
+        function debug (...args:any[]) {
             if (isEnabled(namespace)) {
                 return logger(namespace || 'DEV', args, { prevTime, color })
             }
