@@ -1,6 +1,6 @@
 # debug
 ![tests](https://github.com/nichoth/debug/actions/workflows/nodejs.yml/badge.svg)
-[![module](https://img.shields.io/badge/module-ESM%2FCJS-blue)](README.md)
+[![module](https://img.shields.io/badge/module-ESM-blue)](README.md)
 [![types](https://img.shields.io/npm/types/msgpackr)](README.md)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen)](LICENSE)
 
