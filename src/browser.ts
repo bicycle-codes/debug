@@ -82,7 +82,7 @@ const colors = [
 
 const log = console.log || (() => {})
 
-let createDebug = (namespace?:string) => (args:any) => {}
+let createDebug = (_?:string) => (_:any) => {}
 
 if (import.meta.env.DEV || import.meta.env.VITE_DEBUG) {
     /**
@@ -155,7 +155,7 @@ function createFormatters () {
     }
 }
 
-function logger (namespace:string, args:string[], { prevTime, color }) {
+function logger (namespace:string, args:any[], { prevTime, color }) {
     // Set `diff` timestamp
     const curr = Number(new Date())
     const diff = curr - (prevTime || curr)
