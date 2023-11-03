@@ -148,6 +148,8 @@ export function createDebug (namespace?:string) {
     return debug
 }
 
+export default createDebug
+
 function logger (namespace:string, args:any[], { prevTime, color }) {
     // Set `diff` timestamp
     const curr = Number(new Date())
@@ -213,8 +215,6 @@ function isEnabled (namespace?:string):boolean {
     const envVars = createRegexFromEnvVar(process.env.DEBUG)
     return envVars.some(regex => regex.test(namespace))
 }
-
-export default createDebug
 
 /**
  * Adds ANSI color escape codes if enabled.

@@ -58,9 +58,9 @@ This is ergonomic with the [vite](https://vitejs.dev/) bundler. This module will
 VITE_DEBUG=fooo
 ```
 
-**If you are in production** (`import.meta.env.PROD`), then this exports a noop, so debug will do nothing, and your bundle will be smaller.
+**If you are in production** (`import.meta.env.PROD`) and there is no `VITE_DEBUG` env var, then this exports a noop, so debug will do nothing, and your bundle will be smaller.
 
-#### Call with a namespace
+#### Use a namespace
 In your JS code:
 ```js
 import { createDebug } from '@nichoth/debug'
@@ -68,8 +68,10 @@ const debug = createDebug('fooo')
 debug('debug works')
 ```
 
-#### No namespace
-Or, if you call this without a `namespace` argument, it will look at the value of `import.meta.env.DEV`. If you are in DEV mode, then it will log things in a random color:
+You would start that script with a `VITE_DEBUG=fooo` env var to see the log statements.
+
+#### Don't use a namespace
+If you call this without a `namespace` argument, it will look at the value of `import.meta.env.DEV`. If you are in DEV mode, then it will log things in a random color:
 
 ```js
 const debugTwo = createDebug()
@@ -104,3 +106,4 @@ npm run build-tests
 ```sh
 DEBUG=test node ./test/index.js
 ```
+
