@@ -100,7 +100,7 @@ function getDate ():string {
 /**
  * Invokes `util.format()` with the specified arguments and writes to stderr.
  */
-function log (...args:string[]):boolean {
+function log (...args:any[]):boolean {
     return process.stderr.write(util.format(...args) + '\n')
 }
 
@@ -138,7 +138,7 @@ export function createDebug (namespace:string) {
     let prevTime = Number(new Date())
     const color = selectColor(namespace, colors)
 
-    function debug (...args:string[]) {
+    function debug (...args:any[]) {
         if (isEnabled(namespace)) {
             return logger(namespace, args, { prevTime, color })
         }
@@ -147,7 +147,7 @@ export function createDebug (namespace:string) {
     return debug
 }
 
-function logger (namespace:string, args:string[], { prevTime, color }) {
+function logger (namespace:string, args:any[], { prevTime, color }) {
     // Set `diff` timestamp
     const curr = Number(new Date())
     const diff = curr - (prevTime || curr)
