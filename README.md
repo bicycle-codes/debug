@@ -1,5 +1,6 @@
 # debug
 ![tests](https://github.com/nichoth/debug/actions/workflows/nodejs.yml/badge.svg)
+[![Socket Badge](https://socket.dev/api/badge/npm/package/@nichoth/debug)](https://socket.dev/npm/package/@nichoth/debug)
 ![module](https://img.shields.io/badge/module-ESM-blue)
 ![types](https://img.shields.io/npm/types/@nichoth/debug)
 ![license](https://img.shields.io/badge/license-MIT-brightgreen)
