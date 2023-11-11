@@ -127,6 +127,7 @@ function createFormatters (useColors:boolean, inspectOpts = {}) {
     }
 }
 
+let randomNamespace:string = ''
 /**
  * Create a debugger with the given `namespace`.
  *
@@ -136,7 +137,8 @@ function createFormatters (useColors:boolean, inspectOpts = {}) {
 export function createDebug (namespace?:string) {
     // eslint-disable-next-line
     let prevTime = Number(new Date())
-    const _namespace = namespace || generateRandomString(10)
+    if (!randomNamespace) randomNamespace = generateRandomString(10)
+    const _namespace = namespace || randomNamespace
     const color = selectColor(_namespace, colors)
 
     function debug (...args:any[]) {

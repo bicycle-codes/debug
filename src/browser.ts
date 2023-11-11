@@ -87,6 +87,7 @@ const colors = [
 
 const log = console.log || (() => {})
 
+let randomNamespace:string = ''
 let createDebug = (_?:string) => (_:any) => {}
 
 if (import.meta.env?.DEV || import.meta.env?.VITE_DEBUG) {
@@ -100,8 +101,10 @@ if (import.meta.env?.DEV || import.meta.env?.VITE_DEBUG) {
     createDebug = function createDebug (namespace?:string) {
         // eslint-disable-next-line
         let prevTime = Number(new Date())
-        const _namespace = namespace || generateRandomString(10)
-        const color = selectColor(_namespace, colors)
+        if (!randomNamespace) {
+            randomNamespace = generateRandomString(10)
+        }
+        const color = selectColor(namespace || randomNamespace, colors)
 
         function debug (...args:any[]) {
             if (isEnabled(namespace)) {
