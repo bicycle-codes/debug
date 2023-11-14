@@ -1,9 +1,9 @@
 # debug
 ![tests](https://github.com/nichoth/debug/actions/workflows/nodejs.yml/badge.svg)
 [![Socket Badge](https://socket.dev/api/badge/npm/package/@nichoth/debug)](https://socket.dev/npm/package/@nichoth/debug)
-![module](https://img.shields.io/badge/module-ESM-blue)
-![types](https://img.shields.io/npm/types/@nichoth/debug)
-![license](https://img.shields.io/badge/license-MIT-brightgreen)
+[![module](https://img.shields.io/badge/module-ESM-blue)](README.md)
+[![types](https://img.shields.io/npm/types/@nichoth/debug)](README.md)
+[![license](https://img.shields.io/badge/license-MIT-brightgreen)](LICENSE)
 
 A tiny JavaScript debugging utility that works in Node.js and browsers. Use environment variables to control logging, so there are no ridiculous console log statements in production.
 
