@@ -2,7 +2,7 @@
   "name": "@nichoth/debug",
   "description": "Debug utility",
   "type": "module",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "scripts": {
     "lint": "standardx -v \"./**/*.ts\"",
     "build-tests": "esbuild test/index.ts --platform=node --bundle --format=esm --keep-names > test/index.js",
