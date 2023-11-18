@@ -88,12 +88,12 @@ const colors = [
 const log = console.log || (() => {})
 
 let randomNamespace:string = ''
-let createDebug:(...args:any[])=>void = (_?:string) => (_:any) => {}
+let createDebug = (_?:string) => (...args:any[]) => {}
 
 if (import.meta.env?.DEV || import.meta.env?.VITE_DEBUG) {
     /**
      * Create a debugger with the given `namespace`, only
-     * if we are in DEV mode. (Create a smaller bundle that way)
+     * if we are in DEV mode.
      *
      * @param {string?} namespace
      * @return {Function}
