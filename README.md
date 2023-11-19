@@ -34,12 +34,12 @@ debug('testing')
 ```
 
 Call this with an env var of `DEBUG=fooo`
-```bash
+```sh
 DEBUG=fooo node ./test/fixture/node.js
 ```
 
 #### NODE_ENV
-If you are in dev mode (`process.env.NODE_ENV === 'DEV`), then this will log things in a random color if you don't call it with a namespace or pass in a `DEBUG` env var.
+If you are in dev mode (`process.env.NODE_ENV === 'development'`), then this will log things in a random color if you don't call it with a namespace. 
 
 ```js
 import createDebug from '@nichoth/debug'
@@ -49,7 +49,7 @@ debug('hello')
 
 Run the script like this:
 ```sh
-NODE_ENV=DEV node ./my-script.js
+NODE_ENV=development node ./my-script.js
 ```
 
 ------------------------------------------------------
