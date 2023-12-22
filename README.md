@@ -13,7 +13,7 @@ This is based on [debug](https://github.com/debug-js/debug). It's been rewritten
 * Use [exports](https://github.com/nichoth/debug/blob/main/package.json#L31) field in `package.json` to choose node JS or browser version
 * ESM only
 
-## Installation
+## install
 
 ```sh
 npm i -D @nichoth/debug
@@ -28,7 +28,7 @@ Run your script with an env variable, `DEBUG`.
 
 ```js
 // in node JS
-import createDebug from '@nichoth/debug'
+import createDebug from '@nichoth/debug/node'
 const debug = createDebug('fooo')
 debug('testing')
 ```
@@ -39,7 +39,7 @@ DEBUG=fooo node ./test/fixture/node.js
 ```
 
 #### NODE_ENV
-If you are in dev mode (`process.env.NODE_ENV === 'development'`), then this will log things in a random color if you don't call it with a namespace. 
+If you are in dev mode (`process.env.NODE_ENV === 'dev'`), then this will log things in a random color if you don't initialize it with a namespace --
 
 ```js
 import createDebug from '@nichoth/debug'
@@ -49,7 +49,7 @@ debug('hello')
 
 Run the script like this:
 ```sh
-NODE_ENV=development node ./my-script.js
+NODE_ENV=dev node ./my-script.js
 ```
 
 ------------------------------------------------------
@@ -58,6 +58,13 @@ NODE_ENV=development node ./my-script.js
 This is ergonomic with the [vite](https://vitejs.dev/) bundler. This module will look for an env variable prefixed with `VITE_`:
 ```sh
 VITE_DEBUG=fooo
+```
+
+If you initialize this without a namespace, then it checks `import.meta.env.DEV`:
+```js
+import Debug from '@nichoth/debug'
+const debug = Debug()
+debug('debug works')   // check if `import.meta.env.DEV`
 ```
 
 **If you are in production** (`import.meta.env.PROD`) and there is no `VITE_DEBUG` env var, then this exports a noop, so debug will do nothing, and your bundle will be smaller.

@@ -206,7 +206,7 @@ function isEnabled (namespace?:string):boolean {
     // if no namespace,
     // and we are in DEV mode
     if (namespace === undefined) {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV === 'dev') {
             return true
         }
     }

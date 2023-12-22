@@ -10,8 +10,9 @@
     "test": "npm run lint && npm run build && esbuild test/index.ts --target=es2020 --bundle --platform=node --format=esm | node --input-type=module",
     "build": "mkdir -p dist && rm -rf dist/* && tsc --project tsconfig.build.json",
     "start": "vite",
+    "changelog": "auto-changelog --template keepachangelog --breaking-pattern 'BREAKING CHANGE' && git add CHANGELOG.md && git commit -m 'changelog'",
     "preversion": "npm run lint",
-    "postversion": "git push && git push --tags && npm publish",
+    "postversion": "npm run changelog && git push --follow-tags && npm publish",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
@@ -22,6 +23,7 @@
     "@nichoth/tapzero": "^0.8.0",
     "@types/node": "^20.8.10",
     "@typescript-eslint/parser": "^5.55.0",
+    "auto-changelog": "^2.4.0",
     "esbuild": "^0.19.5",
     "standardx": "^7.0.0",
     "typescript": "^5.0.2",

@@ -88,7 +88,7 @@ const colors = [
 const log = console.log || (() => {})
 
 let randomNamespace:string = ''
-let createDebug = (_?:string) => (...args:any[]) => {}
+let createDebug = (_?:string) => (..._args:any[]) => {}
 
 if (import.meta.env?.DEV || import.meta.env?.VITE_DEBUG) {
     /**
