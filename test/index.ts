@@ -22,3 +22,9 @@ test('log another namespace', t => {
     const debug = createDebug('fooo')
     debug('hello')
 })
+
+test('configure namespace', t => {
+    createDebug.ENV_VAR = 'bla'
+    const debug = createDebug()
+    debug('testing the env var')
+})

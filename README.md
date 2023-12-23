@@ -52,6 +52,21 @@ Run the script like this:
 NODE_ENV=dev node ./my-script.js
 ```
 
+##### configure the environment variable
+Set the property `createDebug.ENV_VAR` to configure the value that we check to know if we are running in development mode.
+
+By default we check that the variable `NODE_ENV` is equal to `'dev'`.
+
+```js
+import createDebug from '@nichoth/debug'
+
+createDebug.ENV_VAR = 'bla'
+const debug = createDebug()
+debug('testing the env var')
+```
+
+Call the above program with `NODE_ENV=bla` to enable logging.
+
 ------------------------------------------------------
 
 ### browser

@@ -150,6 +150,8 @@ export function createDebug (namespace?:string) {
     return debug
 }
 
+createDebug.ENV_VAR = 'dev'
+
 export default createDebug
 
 function logger (namespace:string, args:any[], { prevTime, color }) {
@@ -204,9 +206,9 @@ function logger (namespace:string, args:any[], { prevTime, color }) {
  */
 function isEnabled (namespace?:string):boolean {
     // if no namespace,
-    // and we are in DEV mode
+    // and we are in dev mode
     if (namespace === undefined) {
-        if (process.env.NODE_ENV === 'dev') {
+        if (process.env.NODE_ENV === createDebug.ENV_VAR) {
             return true
         }
     }
