@@ -99,8 +99,7 @@ if (import.meta.env?.DEV || import.meta.env?.VITE_DEBUG) {
      * @return {Function}
      */
     createDebug = function createDebug (namespace?:string) {
-        // eslint-disable-next-line
-        let prevTime = Number(new Date())
+        const prevTime = Number(new Date())
         if (!randomNamespace) {
             randomNamespace = generateRandomString(10)
         }
