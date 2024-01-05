@@ -150,7 +150,9 @@ export function createDebug (namespace?:string) {
     return debug
 }
 
-createDebug.ENV_VAR = 'dev'
+createDebug.shouldLog = function (envString:string) {
+    return (envString && envString === 'development')
+}
 
 export default createDebug
 
@@ -208,9 +210,7 @@ function isEnabled (namespace?:string):boolean {
     // if no namespace,
     // and we are in dev mode
     if (namespace === undefined) {
-        if (process.env.NODE_ENV === createDebug.ENV_VAR) {
-            return true
-        }
+        return !!createDebug.shouldLog(process.env.NODE_ENV!)
     }
 
     if (!namespace) return false

@@ -39,7 +39,7 @@ DEBUG=fooo node ./test/fixture/node.js
 ```
 
 #### NODE_ENV
-If you are in dev mode (`process.env.NODE_ENV === 'dev'`), then this will log things in a random color if you don't initialize it with a namespace --
+If you are in dev mode (`process.env.NODE_ENV === 'development'`), then this will log things in a random color if you don't initialize it with a namespace --
 
 ```js
 import createDebug from '@nichoth/debug'
@@ -49,25 +49,23 @@ debug('hello')
 
 Run the script like this:
 ```sh
-NODE_ENV=dev node ./my-script.js
+NODE_ENV=development node ./my-script.js
 ```
 
-##### configure the environment variable
-Set the property `createDebug.ENV_VAR` to configure the value that we check to know if we are running in development mode.
-
-By default we check that the variable `NODE_ENV` is equal to `'dev'`.
-
+##### Configure the environment value
+Configure what `NODE_ENV` value will trigger logging by overriding the `shoudlLog` function:
 ```js
-import createDebug from '@nichoth/debug'
+// in node only
+import Debug from '@nichoth/debug'
 
-createDebug.ENV_VAR = 'bla'
-const debug = createDebug()
-debug('testing the env var')
+Debug.shouldLog = function (NODE_ENV) {
+    return NODE_ENV === 'example'
+}
+const debug = Debug()
+// this will log iff we start this like
+// NODE_ENV="example" node my-program.js
+debug('testing')
 ```
-
-Call the above program with `NODE_ENV=bla` to enable logging.
-
-------------------------------------------------------
 
 ### browser
 This is ergonomic with the [vite](https://vitejs.dev/) bundler. This module will look for an env variable prefixed with `VITE_`:

@@ -133,6 +133,7 @@ function isEnabled (namespace?:string):boolean {
     if (!namespace) return false
 
     if (!import.meta.env.VITE_DEBUG) return false
+
     const envVars = createRegexFromEnvVar(import.meta.env.VITE_DEBUG)
     return envVars.some(regex => regex.test(namespace))
 }
