@@ -19,9 +19,63 @@ This is based on [debug](https://github.com/debug-js/debug). It's been rewritten
 npm i -D @nichoth/debug
 ```
 
+Use this with [vite](https://vitejs.dev/) in the [browser](#browser) or
+in [node](#node).
+
 ------------------------------------------------------------------
 
 ## example
+
+### browser
+This is ergonomic with the [vite](https://vitejs.dev/) bundler. This module will look for an env variable prefixed with `VITE_`:
+```sh
+VITE_DEBUG=fooo
+```
+
+If you initialize this without a namespace, then it checks `import.meta.env.DEV`:
+```js
+import Debug from '@nichoth/debug'
+const debug = Debug()
+debug('debug works')   // check if `import.meta.env.DEV`
+```
+
+#### a third config option
+You can pass in an env variable of `VITE_DEBUG_MODE`, and then `debug` will
+check for that mode in vite.
+
+##### For example, in the staging environment:
+
+```sh
+VITE_DEBUG_MODE=staging vite build --mode staging
+```
+
+**If you are in production** (`import.meta.env.PROD`) and there is no `VITE_DEBUG` env var, then this exports a noop, so debug will do nothing, and your bundle will be smaller.
+
+#### Use a namespace
+In your JS code:
+```js
+import { createDebug } from '@nichoth/debug'
+const debug = createDebug('fooo')
+debug('debug works')
+```
+
+You would start that script with a `VITE_DEBUG=fooo` env var to see the log statements.
+
+#### Don't use a namespace
+If you call this without a `namespace` argument, it will look at the value of `import.meta.env.DEV`. If you are in DEV mode, then it will log things in a random color:
+
+```js
+const debugTwo = createDebug()
+// this is only logged if `import.meta.env.DEV` is true
+debugTwo('testing debug 2')
+
+setTimeout(() => {
+    debug2('log again')
+}, 1000)
+```
+
+![Screenshot of `debug` in a browser](screenshot2.png)
+
 
 ### node JS
 Run your script with an env variable, `DEBUG`.
@@ -66,46 +120,6 @@ const debug = Debug()
 // NODE_ENV="example" node my-program.js
 debug('testing')
 ```
-
-### browser
-This is ergonomic with the [vite](https://vitejs.dev/) bundler. This module will look for an env variable prefixed with `VITE_`:
-```sh
-VITE_DEBUG=fooo
-```
-
-If you initialize this without a namespace, then it checks `import.meta.env.DEV`:
-```js
-import Debug from '@nichoth/debug'
-const debug = Debug()
-debug('debug works')   // check if `import.meta.env.DEV`
-```
-
-**If you are in production** (`import.meta.env.PROD`) and there is no `VITE_DEBUG` env var, then this exports a noop, so debug will do nothing, and your bundle will be smaller.
-
-#### Use a namespace
-In your JS code:
-```js
-import { createDebug } from '@nichoth/debug'
-const debug = createDebug('fooo')
-debug('debug works')
-```
-
-You would start that script with a `VITE_DEBUG=fooo` env var to see the log statements.
-
-#### Don't use a namespace
-If you call this without a `namespace` argument, it will look at the value of `import.meta.env.DEV`. If you are in DEV mode, then it will log things in a random color:
-
-```js
-const debugTwo = createDebug()
-// this is only logged if `import.meta.env.DEV` is true
-debugTwo('testing debug 2')
-
-setTimeout(() => {
-    debug2('log again')
-}, 1000)
-```
-
-![Screenshot of `debug` in a browser](screenshot2.png)
 
 -------------------------------------------------------------------
 
