@@ -20,3 +20,6 @@ debug4('bazzzzzzz')  // should not log
 
 const debug5 = createDebug()
 debug5('debug 5 should be the same color as debug 2')
+
+const debug6 = createDebug()
+debug6('testing the mode var')  // <-- should log (a test of the MODE variable)

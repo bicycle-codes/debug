@@ -9,7 +9,7 @@
     "test-node": "esbuild ./example/node.js --platform=node --bundle --format=esm --keep-names | NODE_ENV=DEV node --input-type=module",
     "test": "npm run lint && npm run build && esbuild test/index.ts --target=es2020 --bundle --platform=node --format=esm | node --input-type=module",
     "build": "mkdir -p dist && rm -rf dist/* && tsc --project tsconfig.build.json",
-    "start": "vite",
+    "start": "VITE_DEBUG_MODE=staging vite --mode=staging",
     "changelog": "auto-changelog --template keepachangelog --breaking-pattern 'BREAKING CHANGE' && git add CHANGELOG.md && git commit -m 'changelog'",
     "preversion": "npm run lint",
     "postversion": "npm run changelog && git push --follow-tags && npm publish",

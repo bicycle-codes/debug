@@ -90,7 +90,13 @@ const log = console.log || (() => {})
 let randomNamespace:string = ''
 let createDebug = (_?:string) => (..._args:any[]) => {}
 
-if (import.meta.env?.DEV || import.meta.env?.VITE_DEBUG) {
+const modeVar = import.meta.env.VITE_DEBUG_MODE
+
+if (
+    import.meta.env?.DEV ||
+    import.meta.env?.VITE_DEBUG ||
+    (modeVar && import.meta.env.MODE === modeVar)
+) {
     /**
      * Create a debugger with the given `namespace`, only
      * if we are in DEV mode.
@@ -127,6 +133,15 @@ function isEnabled (namespace?:string):boolean {
     if (namespace === undefined) {
         if (import.meta && import.meta.env && import.meta.env.DEV) {
             return true
+        }
+
+        if (import.meta.env.VITE_DEBUG_MODE) {
+            if (
+                import.meta && import.meta.env &&
+                import.meta.env.MODE === import.meta.env.VITE_DEBUG_MODE
+            ) {
+                return true
+            }
         }
     }
 
