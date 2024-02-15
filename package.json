@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "standardx -v \"./**/*.ts\"",
     "build-tests": "esbuild test/index.ts --platform=node --bundle --format=esm --keep-names > test/index.js",
-    "test-node": "esbuild ./example/node.js --platform=node --bundle --format=esm --keep-names | NODE_ENV=DEV node --input-type=module",
+    "test-node": "esbuild ./example/node.js --platform=node --bundle --format=esm --keep-names | NODE_ENV=development node --input-type=module",
     "test": "npm run lint && npm run build && esbuild test/index.ts --target=es2020 --bundle --platform=node --format=esm | node --input-type=module",
     "build": "mkdir -p dist && rm -rf dist/* && tsc --project tsconfig.build.json",
     "start": "VITE_DEBUG_MODE=staging vite --mode=staging",
