@@ -3,6 +3,8 @@
   "description": "Debug utility",
   "type": "module",
   "version": "0.6.1",
+  "main": "./dist/node.js",
+  "files": ["./dist/*"],
   "scripts": {
     "lint": "standardx -v \"./**/*.ts\"",
     "build-tests": "esbuild test/index.ts --platform=node --bundle --format=esm --keep-names > test/index.js",

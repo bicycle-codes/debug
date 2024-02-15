@@ -143,3 +143,7 @@ npm run build-tests
 DEBUG=test node ./test/index.js
 ```
 
+### run examples in node
+
+```sh
+```
