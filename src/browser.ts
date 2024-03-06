@@ -135,7 +135,7 @@ function isEnabled (namespace?:string):boolean {
             return true
         }
 
-        if (import.meta.env.VITE_DEBUG_MODE) {
+        if (import.meta.env && import.meta.env.VITE_DEBUG_MODE) {
             if (
                 import.meta && import.meta.env &&
                 import.meta.env.MODE === import.meta.env.VITE_DEBUG_MODE
