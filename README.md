@@ -20,7 +20,7 @@ npm i -D @nichoth/debug
 ```
 
 Use this with [vite](https://vitejs.dev/) in the [browser](#browser) or
-in [node](#node).
+in [node](#node-JS).
 
 ------------------------------------------------------------------
 
@@ -136,14 +136,5 @@ npm start
 Run tests:
 
 ```sh
-npm run build-tests
-```
-
-```sh
-DEBUG=test node ./test/index.js
-```
-
-### run examples in node
-
-```sh
+npm test
 ```

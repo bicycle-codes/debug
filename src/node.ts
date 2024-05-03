@@ -5,7 +5,7 @@ import util from 'util'
 import { generateRandomString, coerce, createRegexFromEnvVar } from './common.js'
 
 const colors:number[] = (supportsColor &&
-    // @ts-ignore
+    // @ts-expect-error ???
     (supportsColor.stderr || supportsColor).level >= 2) ? ([
         20,
         21,

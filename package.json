@@ -1,5 +1,5 @@
 {
-  "name": "@nichoth/debug",
+  "name": "@bicycle-codes/debug",
   "description": "Debug utility",
   "type": "module",
   "version": "0.6.7",
@@ -8,10 +8,10 @@
     "./dist/*"
   ],
   "scripts": {
-    "lint": "standardx -v \"./**/*.ts\"",
+    "lint": "eslint \"./**/*.{ts,js}\"",
     "build-tests": "esbuild test/index.ts --platform=node --bundle --format=esm --keep-names > test/index.js",
-    "test-node": "esbuild ./example/node.js --platform=node --bundle --format=esm --keep-names | NODE_ENV=development node --input-type=module",
-    "test": "npm run lint && npm run build && esbuild test/index.ts --target=es2020 --bundle --platform=node --format=esm | node --input-type=module",
+    "test-node": "esbuild ./example/node.js --platform=node --bundle --format=esm --keep-names | node --input-type=module",
+    "test": "npm run lint && npm run build && esbuild test/index.ts --target=es2020 --bundle --platform=node --format=esm | DEBUG=test NODE_ENV=development node --input-type=module",
     "build": "mkdir -p dist && rm -rf dist/* && tsc --project tsconfig.build.json",
     "start": "VITE_DEBUG_MODE=staging vite --mode=staging",
     "changelog": "auto-changelog --template keepachangelog --breaking-pattern 'BREAKING CHANGE' && git add CHANGELOG.md && git commit -m 'changelog'",
@@ -24,14 +24,15 @@
     "supports-color": "^9.4.0"
   },
   "devDependencies": {
-    "@nichoth/tapzero": "^0.8.0",
-    "@types/node": "^20.8.10",
-    "@typescript-eslint/parser": "^5.55.0",
+    "@bicycle-codes/tapzero": "^0.9.2",
+    "@types/node": "^20.12.8",
+    "@typescript-eslint/parser": "^7.6.0",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
     "auto-changelog": "^2.4.0",
-    "esbuild": "^0.19.5",
-    "standardx": "^7.0.0",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.9"
+    "esbuild": "^0.20.2",
+    "eslint-config-standard": "^17.1.0",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11"
   },
   "exports": {
     ".": {

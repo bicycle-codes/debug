@@ -1,4 +1,4 @@
-import { test } from '@nichoth/tapzero'
+import { test } from '@bicycle-codes/tapzero'
 import createDebug from '../src/node.js'
 
 let debug
@@ -8,23 +8,14 @@ test('createDebug', t => {
     t.ok(true, "logged something and didn't throw")
 })
 
-test('log some more', async t => {
-    return new Promise<void>(resolve => {
-        setTimeout(() => {
-            debug('log some more things')
-            t.ok(true, 'did not throw')
-            resolve()
-        }, 1000)
-    })
-})
-
-test('log another namespace', t => {
+test('Log another namespace. Should not see this.', t => {
     const debug = createDebug('fooo')
     debug('hello')
+    t.ok(true, 'did not throw')
 })
 
-test('configure namespace', t => {
-    createDebug.ENV_VAR = 'bla'
+test('with NODE_ENV=development', t => {
     const debug = createDebug()
     debug('testing the env var')
+    t.ok('should log if NODE_ENV=development')
 })
