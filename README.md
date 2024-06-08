@@ -1,22 +1,22 @@
 # debug
-![tests](https://github.com/nichoth/debug/actions/workflows/nodejs.yml/badge.svg)
-[![Socket Badge](https://socket.dev/api/badge/npm/package/@nichoth/debug)](https://socket.dev/npm/package/@nichoth/debug)
-[![module](https://img.shields.io/badge/module-ESM-blue)](README.md)
-[![types](https://img.shields.io/npm/types/@nichoth/debug)](README.md)
-[![license](https://img.shields.io/badge/license-MIT-brightgreen)](LICENSE)
+![tests](https://github.com/bicycle-codes/debug/actions/workflows/nodejs.yml/badge.svg)
+[![Socket Badge](https://socket.dev/api/badge/npm/package/@bicycle-codes/debug?style=flat-square)](https://socket.dev/npm/package/@bicycle-codes/debug)
+[![module](https://img.shields.io/badge/module-ESM-blue?style=flat-square)](README.md)
+[![types](https://img.shields.io/npm/types/@bicycle-codes/debug?style=flat-square)](README.md)
+[![license](https://img.shields.io/badge/license-MIT-brightgreen?style=flat-square)](LICENSE)
 
 A tiny JavaScript debugging utility that works in Node.js and browsers. Use environment variables to control logging, so there are no ridiculous console log statements in production.
 
 This is based on [debug](https://github.com/debug-js/debug). It's been rewritten to use contemporary JS.
 
 **Featuring:**
-* Use [exports](https://github.com/nichoth/debug/blob/main/package.json#L31) field in `package.json` to choose node JS or browser version
+* Use [exports](https://github.com/bicycle-codes/debug/blob/main/package.json#L31) field in `package.json` to choose node JS or browser version
 * ESM only
 
 ## install
 
 ```sh
-npm i -D @nichoth/debug
+npm i -D @bicycle-codes/debug
 ```
 
 Use this with [vite](https://vitejs.dev/) in the [browser](#browser) or
@@ -34,7 +34,7 @@ VITE_DEBUG=fooo
 
 If you initialize this without a namespace, then it checks `import.meta.env.DEV`:
 ```js
-import Debug from '@nichoth/debug'
+import Debug from '@bicycle-codes/debug'
 const debug = Debug()
 debug('debug works')   // check if `import.meta.env.DEV`
 ```
@@ -54,7 +54,7 @@ VITE_DEBUG_MODE=staging vite build --mode staging
 #### Use a namespace
 In your JS code:
 ```js
-import { createDebug } from '@nichoth/debug'
+import { createDebug } from '@bicycle-codes/debug'
 const debug = createDebug('fooo')
 debug('debug works')
 ```
@@ -82,7 +82,7 @@ Run your script with an env variable, `DEBUG`.
 
 ```js
 // in node JS
-import createDebug from '@nichoth/debug/node'
+import createDebug from '@bicycle-codes/debug/node'
 const debug = createDebug('fooo')
 debug('testing')
 ```
@@ -96,7 +96,7 @@ DEBUG=fooo node ./test/fixture/node.js
 If you are in dev mode (`process.env.NODE_ENV === 'development'`), then this will log things in a random color if you don't initialize it with a namespace --
 
 ```js
-import createDebug from '@nichoth/debug'
+import createDebug from '@bicycle-codes/debug'
 const debug = createDebug()
 debug('hello')
 ```
@@ -110,7 +110,7 @@ NODE_ENV=development node ./my-script.js
 Configure what `NODE_ENV` value will trigger logging by overriding the `shoudlLog` function:
 ```js
 // in node only
-import Debug from '@nichoth/debug'
+import Debug from '@bicycle-codes/debug'
 
 Debug.shouldLog = function (NODE_ENV) {
     return NODE_ENV === 'example'
