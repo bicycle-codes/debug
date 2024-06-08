@@ -1,6 +1,5 @@
 # debug
 ![tests](https://github.com/bicycle-codes/debug/actions/workflows/nodejs.yml/badge.svg)
-[![Socket Badge](https://socket.dev/api/badge/npm/package/@bicycle-codes/debug)](https://socket.dev/npm/package/@bicycle-codes/debug)
 [![module](https://img.shields.io/badge/module-ESM-blue?style=flat-square)](README.md)
 [![types](https://img.shields.io/npm/types/@bicycle-codes/debug?style=flat-square)](README.md)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen?style=flat-square)](LICENSE)
