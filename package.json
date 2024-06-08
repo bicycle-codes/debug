@@ -51,7 +51,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nichoth/debug.git"
+    "url": "git+https://github.com/bicycle-codes/debug.git"
   },
   "keywords": [
     "debug",
@@ -59,7 +59,7 @@
     "log"
   ],
   "bugs": {
-    "url": "https://github.com/nichoth/debug/issues"
+    "url": "https://github.com/bicycle-codes/debug/issues"
   },
-  "homepage": "https://github.com/nichoth/debug"
+  "homepage": "https://github.com/bicycle-codes/debug"
 }
