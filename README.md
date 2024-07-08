@@ -48,6 +48,20 @@ check for that mode in vite.
 VITE_DEBUG_MODE=staging vite build --mode staging
 ```
 
+##### use multiple modes
+Can parse a comma separated list of modes.
+
+A `.env` file like this:
+```sh
+VITE_DEBUG_MODE="test, staging"
+```
+
+Will log in either "test" or "staging" modes, or if `import.meta.env.DEV` is true.
+
+```sh
+vite --mode staging build
+```
+
 **If you are in production** (`import.meta.env.PROD`) and there is no `VITE_DEBUG` env var, then this exports a noop, so debug will do nothing, and your bundle will be smaller.
 
 #### Use a namespace
