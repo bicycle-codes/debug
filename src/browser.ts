@@ -90,12 +90,13 @@ const log = console.log || (() => {})
 let randomNamespace:string = ''
 let createDebug = (_?:string) => (..._args:any[]) => {}
 
-const modeVar = import.meta.env?.VITE_DEBUG_MODE
+const modeVar = import.meta.env?.VITE_DEBUG_MODE || ''
+const modes = (modeVar && modeVar.split(',')).map(mode => mode.trim()) || []
 
 if (
     import.meta.env?.DEV ||
     import.meta.env?.VITE_DEBUG ||
-    (modeVar && import.meta.env?.MODE === modeVar)
+    (modeVar && modes.includes(import.meta.env.MODE))
 ) {
     /**
      * Create a debugger with the given `namespace`, only
