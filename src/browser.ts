@@ -93,6 +93,8 @@ let createDebug = (_?:string) => (..._args:any[]) => {}
 const modeVar = import.meta.env?.VITE_DEBUG_MODE || ''
 const modes = (modeVar && modeVar.split(',')).map(mode => mode.trim()) || []
 
+console.log('mode varrrrrr', modeVar)
+
 if (
     import.meta.env?.DEV ||
     import.meta.env?.VITE_DEBUG ||
