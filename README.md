@@ -78,10 +78,12 @@ You would start that script with a `VITE_DEBUG=fooo` env var to see the log stat
 If you call this without a `namespace` argument, it will look at the value of `import.meta.env.DEV`. If you are in DEV mode, then it will log things in a random color:
 
 ```js
-const debugTwo = createDebug()
-// this is only logged if `import.meta.env.DEV` is true
-debugTwo('testing debug 2')
+import { createDebug } from '@bicycle-codes/debug'
+const debug = createDebug('fooo')
+const debug2 = createDebug()
 
+debug('debug works')
+debug2('testing debug 2')
 setTimeout(() => {
     debug2('log again')
 }, 1000)
