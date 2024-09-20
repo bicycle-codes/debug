@@ -2,19 +2,20 @@
 * Coerce `val`.
 *
 * @param {unknown} val
-* @return {unknown}
+* @return {string}
 */
 export function coerce (val:unknown):string {
     if (val instanceof Error) {
         return val.stack || val.message
     }
+
     return String(val)
 }
 
 /**
  * Selects a color for a debug namespace
  * @param {string} namespace The namespace string for the debug instance to be colored
- * @return {number} An ANSI color code for the given namespace
+ * @return {number|string} An ANSI color code for the given namespace
  */
 export function selectColor (
     namespace:string,

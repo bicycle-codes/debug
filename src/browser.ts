@@ -93,7 +93,7 @@ let createDebug = (_?:string) => (..._args:any[]) => {}
 const modeVar = import.meta?.env?.VITE_DEBUG_MODE || ''
 let modes:string[] = []
 if (modeVar) {
-    modes = (modeVar && modeVar.split(',')).map(mode => mode.trim()) || []
+    modes = (modeVar.split(',')).map(mode => mode.trim())
 }
 
 if (
@@ -162,7 +162,7 @@ function isEnabled (namespace?:string):boolean {
  */
 function createFormatters () {
     return {
-        j: function (v) {
+        j: function (v:any) {
             try {
                 return JSON.stringify(v)
             } catch (error) {

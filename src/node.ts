@@ -246,6 +246,7 @@ function formatArgs ({ diff, color, namespace, useColors }:{
 /**
  * Selects a color for a debug namespace
  * @param {string} namespace The namespace string for the debug instance to be colored
+ * @param {number[]} colors The namespace string for the debug instance to be colored
  * @return {number} An ANSI color code for the given namespace
  */
 function selectColor (namespace:string, colors:number[]):number {
