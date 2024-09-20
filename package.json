@@ -15,7 +15,7 @@
     "build-browser-tests": "esbuild test/index.ts --platform=node --target=es2020 --bundle --keep-names > test/test-bundle.js",
     "test-tape-run": "npm run build-browser-tests && cat test/index.html | tape-run --input=html --static=test | tap-spec",
     "build": "mkdir -p dist && rm -rf dist/* && tsc --project tsconfig.build.json",
-    "build-docs": "typedoc ./src/index.ts",
+    "build-docs": "typedoc ./src/browser.ts ./src/node.ts",
     "toc": "markdown-toc --maxdepth 3 -i README.md",
     "start": "VITE_DEBUG_MODE=staging vite --mode=staging",
     "preversion": "npm run lint",
