@@ -134,7 +134,7 @@ let randomNamespace:string = ''
  * @param {string} namespace
  * @return {Function}
  */
-export function createDebug (namespace?:string|null, env?:Record<string, string>) {
+export function createDebug (namespace?:string|null, env?:Record<string, any>) {
     // eslint-disable-next-line
     let prevTime = Number(new Date())
     if (!randomNamespace) randomNamespace = generateRandomString(10)
