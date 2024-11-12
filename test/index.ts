@@ -19,3 +19,9 @@ test('with NODE_ENV=development', t => {
     debug('testing the env var')
     t.ok('should log if NODE_ENV=development')
 })
+
+test('pass in an env variable', t => {
+    const debug = createDebug(null, { NODE_ENV: 'test' })
+    t.ok(debug, 'should return a new instance')
+    debug('test env var')
+})

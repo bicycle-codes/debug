@@ -134,7 +134,7 @@ let randomNamespace:string = ''
  * @param {string} namespace
  * @return {Function}
  */
-export function createDebug (namespace?:string) {
+export function createDebug (namespace?:string|null, env?:Record<string, string>) {
     // eslint-disable-next-line
     let prevTime = Number(new Date())
     if (!randomNamespace) randomNamespace = generateRandomString(10)
@@ -142,7 +142,7 @@ export function createDebug (namespace?:string) {
     const color = selectColor(_namespace, colors)
 
     function debug (...args:any[]) {
-        if (isEnabled(namespace)) {
+        if (isEnabled(namespace, env)) {
             return logger(namespace || 'DEV', args, { prevTime, color })
         }
     }
@@ -151,7 +151,7 @@ export function createDebug (namespace?:string) {
 }
 
 createDebug.shouldLog = function (envString:string) {
-    return (envString && envString === 'development')
+    return (envString && (envString === 'development' || envString === 'test'))
 }
 
 export default createDebug
@@ -206,17 +206,18 @@ function logger (namespace:string, args:any[], { prevTime, color }) {
 /**
  * Check if the given namespace is enabled.
  */
-function isEnabled (namespace?:string):boolean {
-    // if no namespace,
-    // and we are in dev mode
-    if (namespace === undefined) {
-        return !!createDebug.shouldLog(process.env.NODE_ENV!)
+function isEnabled (namespace?:string|null, _env?:Record<string, string>):boolean {
+    const env = _env || process.env
+
+    // if no namespace, and we are in dev mode
+    if (!namespace) {
+        return !!createDebug.shouldLog(env.NODE_ENV!)
     }
 
     if (!namespace) return false
-    if (!process.env.DEBUG) return false
+    if (!env.DEBUG) return false
 
-    const envVars = createRegexFromEnvVar(process.env.DEBUG)
+    const envVars = createRegexFromEnvVar(env.DEBUG)
     return envVars.some(regex => regex.test(namespace))
 }
 
