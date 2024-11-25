@@ -1,5 +1,5 @@
 {
-  "name": "@bicycle-codes/debug",
+  "name": "@substrate-system/debug",
   "description": "Debug utility",
   "type": "module",
   "version": "0.7.2",
@@ -59,7 +59,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bicycle-codes/debug.git"
+    "url": "git+https://github.com/substrate-system/debug.git"
   },
   "keywords": [
     "debug",
@@ -67,7 +67,7 @@
     "log"
   ],
   "bugs": {
-    "url": "https://github.com/bicycle-codes/debug/issues"
+    "url": "https://github.com/substrate-system/debug/issues"
   },
-  "homepage": "https://github.com/bicycle-codes/debug"
+  "homepage": "https://github.com/substrate-system/debug"
 }
