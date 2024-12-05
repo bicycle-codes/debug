@@ -49,6 +49,15 @@ This is ergonomic with the [vite](https://vitejs.dev/) bundler. This module will
 VITE_DEBUG=fooo
 ```
 
+Given then above env variable in vite, you would log like this:
+```js
+import Debug from '@substrate-system/debug'
+const debug = Debug('fooo')
+debug('hello fooo')
+```
+
+#### DEV mode
+
 If you initialize this without a namespace, then it checks `import.meta.env.DEV`:
 ```js
 import Debug from '@substrate-system/debug'
