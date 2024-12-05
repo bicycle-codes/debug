@@ -23,3 +23,7 @@ debug5('debug 5 should be the same color as debug 2')
 
 const debug6 = createDebug()
 debug6('testing the mode var')  // <-- should log (a test of the MODE variable)
+
+// testing the * variable
+const debug7 = createDebug('quxxx')
+debug7('hello quxxx')
