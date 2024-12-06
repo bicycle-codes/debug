@@ -56,6 +56,13 @@ const debug = Debug('fooo')
 debug('hello fooo')
 ```
 
+#### *
+Use an environment variable of `*` to log everything.
+
+```sh
+VITE_DEBUG="*"
+```
+
 #### DEV mode
 
 If you initialize this without a namespace, then it checks `import.meta.env.DEV`:
