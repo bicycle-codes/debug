@@ -87,13 +87,13 @@ const colors = [
 
 const log = console.log || (() => {})
 
-interface Debugger {
-    (env?:string):void;
+interface CreateDebugger {
+    (env?:string):(...args:any[])=>void;
     shouldLog?:(env:string)=>boolean;
 }
 
 let randomNamespace:string = ''
-let createDebug:Debugger = (_?:string) => (..._args:any[]) => {}
+let createDebug:CreateDebugger = (_?:string) => (..._args:any[]) => {}
 
 const modeVar = import.meta?.env?.VITE_DEBUG_MODE || ''
 let modes:string[] = []
