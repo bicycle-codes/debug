@@ -87,8 +87,13 @@ const colors = [
 
 const log = console.log || (() => {})
 
+interface Debugger {
+    (env:string):void;
+    shouldLog?:(env:string)=>boolean;
+}
+
 let randomNamespace:string = ''
-let createDebug = (_?:string) => (..._args:any[]) => {}
+let createDebug:Debugger = (_?:string) => (..._args:any[]) => {}
 
 const modeVar = import.meta?.env?.VITE_DEBUG_MODE || ''
 let modes:string[] = []
@@ -123,6 +128,13 @@ if (
 
         return debug
     }
+
+    createDebug.shouldLog = function (envString:string) {
+        return !!(
+            envString &&
+            (envString === 'development' || envString === 'test')
+        )
+    }
 }
 
 export { createDebug }
@@ -132,29 +144,14 @@ export default createDebug
  * Check if the given namespace is enabled.
  */
 function isEnabled (namespace?:string):boolean {
-    // if no namespace,
-    // and we are in vite DEV mode
-    if (namespace === undefined) {
-        if (import.meta && import.meta.env?.DEV) {
-            return true
-        }
+    if (import.meta.env?.VITE_DEBUG?.includes('*')) return true
 
-        if (import.meta.env?.VITE_DEBUG_MODE) {
-            if (
-                import.meta && import.meta.env &&
-                import.meta.env.MODE === import.meta.env.VITE_DEBUG_MODE
-            ) {
-                return true
-            }
-        }
+    // if no namespace, check if we are in dev mode
+    if (!namespace) {
+        return createDebug.shouldLog!(import.meta.env.VITE_DEBUG_MODE)
     }
 
-    if (!namespace) return false
-
-    if (!import.meta.env || !import.meta.env.VITE_DEBUG) return false
-
-    if (import.meta.env.VITE_DEBUG.includes('*')) return true
-
+    // else, we do have a namespace
     const envVars = createRegexFromEnvVar(import.meta.env?.VITE_DEBUG)
     return envVars.some(regex => regex.test(namespace))
 }

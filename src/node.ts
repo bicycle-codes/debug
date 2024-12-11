@@ -214,7 +214,7 @@ function isEnabled (namespace?:string|null, _env?:Record<string, string>):boolea
         return !!createDebug.shouldLog(env.NODE_ENV!)
     }
 
-    if (!namespace) return false
+    // if no env DEBUG mode
     if (!env.DEBUG) return false
 
     const envVars = createRegexFromEnvVar(env.DEBUG)

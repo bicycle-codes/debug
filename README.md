@@ -126,7 +126,7 @@ setTimeout(() => {
 ![Screenshot of `debug` in a browser](screenshot2.png)
 
 
-### node JS
+### Node JS
 Run your script with an env variable, `DEBUG`.
 
 ```js
