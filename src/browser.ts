@@ -88,7 +88,7 @@ const colors = [
 const log = console.log || (() => {})
 
 interface Debugger {
-    (env:string):void;
+    (env?:string):void;
     shouldLog?:(env:string)=>boolean;
 }
 
