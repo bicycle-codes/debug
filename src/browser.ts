@@ -130,9 +130,7 @@ if (
     }
 
     createDebug.shouldLog = function (envString?:string):boolean {
-        console.log('env string', envString)
         if (!envString) {
-            console.log('no env string', import.meta.env.DEV)
             return import.meta.env.DEV
         } else {
             return (envString === 'development' || envString === 'test')
