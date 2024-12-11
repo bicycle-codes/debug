@@ -129,11 +129,14 @@ if (
         return debug
     }
 
-    createDebug.shouldLog = function (envString:string) {
-        return !!(
-            envString &&
-            (envString === 'development' || envString === 'test')
-        )
+    createDebug.shouldLog = function (envString?:string):boolean {
+        console.log('env string', envString)
+        if (!envString) {
+            console.log('no env string', import.meta.env.DEV)
+            return import.meta.env.DEV
+        } else {
+            return (envString === 'development' || envString === 'test')
+        }
     }
 }
 
@@ -144,16 +147,22 @@ export default createDebug
  * Check if the given namespace is enabled.
  */
 function isEnabled (namespace?:string):boolean {
-    if (import.meta.env?.VITE_DEBUG?.includes('*')) return true
-
     // if no namespace, check if we are in dev mode
     if (!namespace) {
-        return createDebug.shouldLog!(import.meta.env.VITE_DEBUG_MODE)
+        const ok = createDebug.shouldLog!(import.meta.env.VITE_DEBUG_MODE)
+        // check if we were passed a `vite_debug` variable
+        if (ok && !import.meta.env.VITE_DEBUG) return true
+        return false
     }
 
     // else, we do have a namespace
-    const envVars = createRegexFromEnvVar(import.meta.env?.VITE_DEBUG)
-    return envVars.some(regex => regex.test(namespace))
+    if (createDebug.shouldLog!(import.meta.env.VITE_DEBUG_MODE)) {
+        // are we in dev mode? then check the namespace
+        const envVars = createRegexFromEnvVar(import.meta.env?.VITE_DEBUG)
+        return envVars.some(regex => regex.test(namespace))
+    }
+
+    return false
 }
 
 /**
