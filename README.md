@@ -156,7 +156,7 @@ NODE_ENV=development node ./my-script.js
 ```
 
 ##### Configure the environment value
-Configure what `NODE_ENV` value will trigger logging by overriding the `shoudlLog` function:
+Configure what `NODE_ENV` value will trigger logging by overriding the `shouldLog` function:
 ```js
 // in node only
 import Debug from '@substrate-system/debug'
