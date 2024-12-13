@@ -1,3 +1,4 @@
+import '@substrate-system/util/node/self'
 import supportsColor from 'supports-color'
 import ms from 'ms'
 import tty from 'tty'
